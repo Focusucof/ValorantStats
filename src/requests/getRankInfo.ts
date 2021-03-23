@@ -1,5 +1,5 @@
 import * as request from 'request';
-var rankInfo = require('./rankInfo.json')
+var rankInfo = require('../rankInfo.json')
 
 module.exports = {
     getRankInfo: function (playerID, entitlementToken, authToken) {
@@ -32,7 +32,7 @@ function getMMR(response) {
     let currentRankID : number = json.Matches[0].TierAfterUpdate;
     let currentRank: string = getRankFromID(currentRankID);
 
-    console.log(JSON.parse(response.body));
+    //console.log(JSON.parse(response.body));
     console.log('Curent ELO: ', currentMMR);
     console.log('Current Rank ID: ', currentRankID);
     console.log('Current Rank Name: ', currentRank);
