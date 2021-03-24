@@ -2,7 +2,7 @@ const playerMMR = require('../resources/getRankInfo.json');
 const rankInfo = require('../rankInfo.json');
 
 module.exports = {
-    matchRankID: function() {
+    parseRank: function() {
         let currentMMR : number = playerMMR.Matches[0].RankedRatingAfterUpdate;
         let currentRankID : number = playerMMR.Matches[0].TierAfterUpdate;
         let currentRank: string = getRankFromID(currentRankID);
