@@ -21,11 +21,9 @@ module.exports = {
                 console.log(error);
             }
             //console.log(JSON.parse(response.body));
-            fs.writeFile('items.json', response.body, function(err) {
+            fs.writeFile('builds/resources/items.json', response.body, function(err) {
                 if(err) {
                   console.log(err);
-                } else {
-                  console.log("JSON saved to items.json");
                 }
             }); 
         });

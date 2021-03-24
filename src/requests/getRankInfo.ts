@@ -1,4 +1,5 @@
 import * as request from 'request';
+import * as fs from 'fs';
 var rankInfo = require('../rankInfo.json')
 
 module.exports = {
@@ -18,7 +19,11 @@ module.exports = {
             if(error) {
                 console.log(error);
             }
-
+            fs.writeFile('builds/resources/playerMMR.json', response.body, function(err) {
+                if(err) {
+                  console.log(err);
+                }
+            }); 
             getMMR(response);
         });
     }

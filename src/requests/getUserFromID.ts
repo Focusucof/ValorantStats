@@ -1,4 +1,5 @@
 import * as request from 'request';
+import * as fs from 'fs';
 
 module.exports = {
     getUserFromID: function (playerID, entitlementToken, authToken) {
@@ -18,6 +19,11 @@ module.exports = {
             if(error) {
                 console.log(error);
             }
+            fs.writeFile('builds/resources/user.json', response.body, function(err) {
+                if(err) {
+                  console.log(err);
+                }
+            }); 
             console.log(response.body);
         });
     }

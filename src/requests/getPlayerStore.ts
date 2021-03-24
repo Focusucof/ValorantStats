@@ -1,4 +1,6 @@
 import * as request from 'request';
+import * as fs from 'fs';
+
 
 module.exports = {
     getPlayerStore: function(playerID, entitlementToken, authToken) {
@@ -16,7 +18,12 @@ module.exports = {
             if(error) {
                 console.log(error);
             }
-            console.log(JSON.parse(response.body));
+            //console.log(JSON.parse(response.body));
+            fs.writeFile('builds/resources/playerStore.json', response.body, function(err) {
+                if(err) {
+                    console.log(err);
+                }
+            });
         });
     }
 }
