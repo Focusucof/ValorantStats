@@ -44,8 +44,11 @@ console.log('In Game Name: ', gameName);
 
 const parseStore = require('./logic/parsePlayerStore.js');
 
-let store = parseStore.parseStore();
+let storeIDs = parseStore.parseStore();
+console.log(storeIDs);
 
-console.log(store);
+const getSkinName = require('./logic/getSkinName.js');
+
+let skinNames = getSkinName.getSkinName(storeIDs);
 
 
