@@ -1,6 +1,7 @@
 import * as request from 'request';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
+import * as sleep from 'sleep';
 
 const getRankInfo = require('./requests/getRankInfo.js');
 const getUserFromID = require('./requests/getUserFromID.js');
@@ -19,7 +20,7 @@ getUserFromID.getUserFromID(playerID, entitlementToken, authToken);
 getPlayerStore.getPlayerStore(playerID, entitlementToken, authToken);
 getItemID.getItemID(playerID, entitlementToken, authToken, clientVersion);
 
-
+//comment everthing after
 const parseRank = require('./logic/parseRank.js')
 
 let rank = parseRank.parseRank();
@@ -43,12 +44,9 @@ let gameName : string = user[2];
 console.log('In Game Name: ', gameName);
 
 const parseStore = require('./logic/parsePlayerStore.js');
-
 let storeIDs = parseStore.parseStore();
-console.log(storeIDs);
 
 const getSkinName = require('./logic/getSkinName.js');
-
 let skinNames = getSkinName.getSkinName(storeIDs);
 
 
