@@ -18,13 +18,14 @@ module.exports = {
         request(options, function (error, response) {
             if(error) {
                 console.log(error);
-            }
-            fs.writeFile('builds/resources/playerMMR.json', response.body, function(err) {
+            } else {
+            fs.writeFile('builds/resources/getRankInfo.json', response.body, function(err) {
                 if(err) {
                   console.log(err);
                 }
             }); 
-            getMMR(response);
+        }
+            //getMMR(response);
         });
     }
 }

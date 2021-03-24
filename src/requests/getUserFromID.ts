@@ -24,7 +24,7 @@ module.exports = {
                   console.log(err);
                 }
             }); 
-            console.log(response.body);
+            //console.log(response.body);
         });
     }
 }

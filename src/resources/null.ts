@@ -1,0 +1,1 @@
+//used to generate builds/resources directory with tsc
