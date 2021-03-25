@@ -7,7 +7,7 @@ module.exports = {
 
         //console.log(storeIDs)
 
-        let results = singleOffers(storeIDs);
+        let singleSkins = singleOffers(storeIDs);
 
         function singleOffers(storeIDs) {
             var results = [];
@@ -27,11 +27,30 @@ module.exports = {
             return results
         }
 
-        function bundleOffers(storeIDs) {
+        let bundleSkins = bundleOffers(storeIDs[0]);
 
+        function bundleOffers(storeIDs) {
+            var results;
+
+            var searchVal = storeIDs;            
+            var upperSearchVal = searchVal.toUpperCase();
+            for (var i = 0; i < items.StorefrontItems.length; i++) {
+                if(upperSearchVal == items.StorefrontItems[i].ID) {
+                    results = (items.StorefrontItems[i].Name);
+                }
+            }
+            return results
         }
 
-        console.log(results);
-        
+        let skinNames = [];
+
+        skinNames.push(bundleSkins);
+        skinNames.push(singleSkins[0]);
+        skinNames.push(singleSkins[1]);
+        skinNames.push(singleSkins[2]);
+        skinNames.push(singleSkins[3]);
+
+        //console.log(skinNames)
+        return skinNames;
     }
 }

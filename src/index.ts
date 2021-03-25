@@ -58,6 +58,18 @@ function parseInfo() {
     const getSkinName = require('./logic/getSkinName.js');
     let skinNames = getSkinName.getSkinName(storeIDs);
 
+    let bundleOffer = skinNames[0];
+    let singleOffer1 = skinNames[1];
+    let singleOffer2 = skinNames[2];
+    let singleOffer3 = skinNames[3];   
+    let singleOffer4 = skinNames[4];
+    
+    console.log(bundleOffer);
+    console.log(singleOffer1);    
+    console.log(singleOffer2);
+    console.log(singleOffer3);
+    console.log(singleOffer4);
+
 }
 
 getRequests();
