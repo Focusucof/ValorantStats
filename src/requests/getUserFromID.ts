@@ -21,10 +21,9 @@ module.exports = {
             }
             fs.writeFile('builds/resources/user.json', response.body, function(err) {
                 if(err) {
-                  console.log(err);
+                    console.log(err);
                 }
             }); 
-            //console.log(response.body);
         });
     }
 }

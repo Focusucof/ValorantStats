@@ -3,50 +3,61 @@ import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as sleep from 'sleep';
 
-const getRankInfo = require('./requests/getRankInfo.js');
-const getUserFromID = require('./requests/getUserFromID.js');
-const getPlayerStore = require('./requests/getPlayerStore.js');
-const getItemID = require('./requests/getItemID.js');
+function getRequests() {
+    
+    const getRankInfo = require('./requests/getRankInfo.js');
+    const getUserFromID = require('./requests/getUserFromID.js');
+    const getPlayerStore = require('./requests/getPlayerStore.js');
+    const getItemID = require('./requests/getItemID.js');
 
-dotenv.config();
+    dotenv.config();
 
-let playerID : string = '10a19205-2c9b-5103-a689-ed80299bc19a';
-let entitlementToken: string = `${process.env.entitlementToken}`;
-let authToken : string = `${process.env.authToken}`;
-let clientVersion : string = 'release-02.05-shipping-4-533692';
+    let playerID : string = '10a19205-2c9b-5103-a689-ed80299bc19a';
+    let entitlementToken: string = `${process.env.entitlementToken}`;
+    let authToken : string = `${process.env.authToken}`;
+    let clientVersion : string = 'release-02.05-shipping-4-533692';
 
-getRankInfo.getRankInfo(playerID, entitlementToken, authToken);
-getUserFromID.getUserFromID(playerID, entitlementToken, authToken);
-getPlayerStore.getPlayerStore(playerID, entitlementToken, authToken);
-getItemID.getItemID(playerID, entitlementToken, authToken, clientVersion);
+    getRankInfo.getRankInfo(playerID, entitlementToken, authToken);
+    getUserFromID.getUserFromID(playerID, entitlementToken, authToken);
+    getPlayerStore.getPlayerStore(playerID, entitlementToken, authToken);
+    getItemID.getItemID(playerID, entitlementToken, authToken, clientVersion);
 
-//comment everthing after
-const parseRank = require('./logic/parseRank.js')
+    //avoid race condition by waiting for info to be written to file
+    setTimeout(parseInfo, 1500);
 
-let rank = parseRank.parseRank();
+}
 
-let currentMMR : number = rank[0];
-let currentRankID : number = rank[1];
-let currentRank: string = rank[2];
+function parseInfo() {
 
-console.log('Curent ELO: ', currentMMR);
-console.log('Current Rank ID: ', currentRankID);
-console.log('Current Rank Name: ', currentRank);
+    //comment everthing after
+    const parseRank = require('./logic/parseRank.js')
 
-const parseUser = require('./logic/parseUser.js');
+    let rank = parseRank.parseRank();
 
-let user = parseUser.parseUser();
+    let currentMMR : number = rank[0];
+    let currentRankID : number = rank[1];
+    let currentRank: string = rank[2];
 
-let name : string = user[0];
-let tag : string = user[1];
-let gameName : string = user[2];
+    console.log('Curent ELO: ', currentMMR);
+    console.log('Current Rank ID: ', currentRankID);
+    console.log('Current Rank Name: ', currentRank);
 
-console.log('In Game Name: ', gameName);
+    const parseUser = require('./logic/parseUser.js');
 
-const parseStore = require('./logic/parsePlayerStore.js');
-let storeIDs = parseStore.parseStore();
+    let user = parseUser.parseUser();
 
-const getSkinName = require('./logic/getSkinName.js');
-let skinNames = getSkinName.getSkinName(storeIDs);
+    let name : string = user[0];
+    let tag : string = user[1];
+    let gameName : string = user[2];
 
+    console.log('In Game Name: ', gameName);
 
+    const parseStore = require('./logic/parsePlayerStore.js');
+    let storeIDs = parseStore.parseStore();
+
+    const getSkinName = require('./logic/getSkinName.js');
+    let skinNames = getSkinName.getSkinName(storeIDs);
+
+}
+
+getRequests();

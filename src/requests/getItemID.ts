@@ -23,10 +23,9 @@ module.exports = {
             //console.log(JSON.parse(response.body));
             fs.writeFile('builds/resources/items.json', response.body, function(err) {
                 if(err) {
-                  console.log(err);
+                    console.log(err);
                 }
             }); 
         });
-        
     }
 }
