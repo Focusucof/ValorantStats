@@ -3,14 +3,20 @@ import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as sleep from 'sleep';
 
-function getRequests() {
+async function getRequests() {
     
     const getRankInfo = require('./requests/getRankInfo.js');
     const getUserFromID = require('./requests/getUserFromID.js');
     const getPlayerStore = require('./requests/getPlayerStore.js');
     const getItemID = require('./requests/getItemID.js');
+    const login = require('./logic/RSOLogin.js');
 
     dotenv.config();
+
+    let username : string = `${process.env.USERNAME}`;
+    let password : string = `${process.env.PASSWORD}`;
+
+    login.login(username, password);
 
     let playerID : string = '10a19205-2c9b-5103-a689-ed80299bc19a';
     let entitlementToken: string = `${process.env.entitlementToken}`;
