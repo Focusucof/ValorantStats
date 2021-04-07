@@ -3,25 +3,32 @@ import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as sleep from 'sleep';
 
+dotenv.config();
+
+function getLogin() {
+
+    let username : string = `${process.env.USERNAME}`;
+    let password : string = `${process.env.PASSWORD}`;
+
+    const login = require('./logic/RSOLogin.js');
+    login.login(username, password)
+
+    setTimeout(getRequests, 1500)
+}
+
 async function getRequests() {
     
     const getRankInfo = require('./requests/getRankInfo.js');
     const getUserFromID = require('./requests/getUserFromID.js');
     const getPlayerStore = require('./requests/getPlayerStore.js');
     const getItemID = require('./requests/getItemID.js');
-    const login = require('./logic/RSOLogin.js');
+    
+    const playerTokens = require('./resources/auth.json');
 
-    dotenv.config();
-
-    let username : string = `${process.env.USERNAME}`;
-    let password : string = `${process.env.PASSWORD}`;
-
-    login.login(username, password);
-
-    let playerID : string = '10a19205-2c9b-5103-a689-ed80299bc19a';
-    let entitlementToken: string = `${process.env.entitlementToken}`;
-    let authToken : string = `${process.env.authToken}`;
-    let clientVersion : string = 'release-02.05-shipping-4-533692';
+    let playerID : string = playerTokens.userid;
+    let entitlementToken: string = playerTokens.entitlement;
+    let authToken : string = playerTokens.auth;
+    let clientVersion : string = 'release-02.06-shipping-14-540727';
 
     getRankInfo.getRankInfo(playerID, entitlementToken, authToken);
     getUserFromID.getUserFromID(playerID, entitlementToken, authToken);
@@ -78,4 +85,4 @@ function parseInfo() {
 
 }
 
-getRequests();
+getLogin();
