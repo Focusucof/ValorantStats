@@ -43,12 +43,13 @@ module.exports = {
             });
 
             //---------------UNCOMMENT ANYTHING WITH 'arrayTokens.access_token' AFTER COMPILING---------------
-            var accessToken;
-            //accessToken = arrayTokens.access_token
+            // @ts-ignore
+            var accessToken = arrayTokens.access_token
             
 
             let headers = {
-                //'Authorization': `Bearer ${arrayTokens.access_token}`
+                // @ts-ignore
+                'Authorization': `Bearer ${arrayTokens.access_token}`
             }
 
             axios.post('https://entitlements.auth.riotgames.com/api/token/v1', {}, {jar: cookieJar, withCredentials: true, headers})

@@ -7,7 +7,7 @@ module.exports = {
         
         var options = {
             'method': 'GET',
-            'url': 'https://pd.na.a.pvp.net/mmr/v1/players/10a19205-2c9b-5103-a689-ed80299bc19a/competitiveupdates',
+            'url': 'https://pd.na.a.pvp.net/mmr/v1/players/' + playerID + '/competitiveupdates',
             'headers': {
                 'X-Riot-Entitlements-JWT': entitlementToken,
                 'X-Riot-ClientPlatform': 'ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9',

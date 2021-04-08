@@ -1,14 +1,13 @@
-import * as request from 'request';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
-import * as sleep from 'sleep';
+import * as readline from 'readline-sync';
 
 dotenv.config();
 
 function getLogin() {
 
-    let username : string = `${process.env.USERNAME}`;
-    let password : string = `${process.env.PASSWORD}`;
+    let username : string = readline.question('Username: ');
+    let password : string = readline.question('Password: ');
 
     const login = require('./logic/RSOLogin.js');
     login.login(username, password)
@@ -16,7 +15,7 @@ function getLogin() {
     setTimeout(getRequests, 1500)
 }
 
-async function getRequests() {
+function getRequests() {
     
     const getRankInfo = require('./requests/getRankInfo.js');
     const getUserFromID = require('./requests/getUserFromID.js');
