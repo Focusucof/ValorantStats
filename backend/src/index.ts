@@ -6,8 +6,8 @@ dotenv.config();
 
 function getLogin() {
 
-    let username : string = readline.question('Username: ');
-    let password : string = readline.question('Password: ');
+    let username : string = process.env.USERNAME;
+    let password : string = process.env.PASSWORD;
 
     const login = require('./logic/RSOLogin.js');
     login.login(username, password)
@@ -27,7 +27,7 @@ function getRequests() {
     let playerID : string = playerTokens.userid;
     let entitlementToken: string = playerTokens.entitlement;
     let authToken : string = playerTokens.auth;
-    let clientVersion : string = 'release-02.06-shipping-14-540727';
+    let clientVersion : string = 'release-02.07-shipping-3-543856';
 
     getRankInfo.getRankInfo(playerID, entitlementToken, authToken);
     getUserFromID.getUserFromID(playerID, entitlementToken, authToken);
